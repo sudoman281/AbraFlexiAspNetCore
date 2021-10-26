@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>ABRA Flexi ASP.NET Core</Title>
+        <Authors>Václav Kozák</Authors>
+        <Description>ASP.NET Core Library for interaction with Czech accounting system Abra Flexi.</Description>
+        <Copyright>Copyright 2021 Václav Kozák</Copyright>
+        <PackageProjectUrl>https://github.com/sudoman281/AbraFlexiAspNetCore</PackageProjectUrl>
+        <PackageLicenseFile>license.txt</PackageLicenseFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/sudoman281/AbraFlexiAspNetCore</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>abra flexi flexibee accounting czech asp net core</PackageTags>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="licenses\license.txt" Pack="true" PackagePath="license.txt" />
+        <None Include="icon.png" Pack="true" PackagePath="icon.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    </ItemGroup>
+</Project>
