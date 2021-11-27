@@ -1,6 +1,16 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0193ef58_002D4d2c_002D46e1_002Dad4e_002Df55d48aa4acd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestGetPriceList" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0193ef58_002D4d2c_002D46e1_002Dad4e_002Df55d48aa4acd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestGetPriceList" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.ReadTests.TestGetPriceList&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.ReadTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.WriteTests.TestCreateInvoice&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.WriteTests.TestCreateBankReceivedPayment&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.WriteTests.TestCreateAndPayInvoice&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.WriteTests.TestPairPayment&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=41cf44f5_002D15a7_002D480c_002D817e_002D4a0f19d97824/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestCreateAndPayInvoice" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.WriteTests.TestCreateAndPayInvoice&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.ReadTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
