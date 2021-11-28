@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Title>ABRA Flexi ASP.NET Core</Title>
         <Authors>Václav Kozák</Authors>
         <Description>ASP.NET Core Library for interaction with Czech accounting system Abra Flexi.</Description>
@@ -17,7 +18,7 @@
         <Nullable>enable</Nullable>
         <PackageVersion>1.1.0</PackageVersion>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <None Include="licenses\license.txt" Pack="true" PackagePath="license.txt" />
         <None Include="icon.png" Pack="true" PackagePath="icon.png" />

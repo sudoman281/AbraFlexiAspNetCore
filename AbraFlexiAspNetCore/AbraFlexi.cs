@@ -2,6 +2,9 @@
 
 namespace AbraFlexiAspNetCore
 {
+    /// <summary>
+    /// Root object of the API
+    /// </summary>
     public static class AbraFlexi
     {
         /// <summary>
