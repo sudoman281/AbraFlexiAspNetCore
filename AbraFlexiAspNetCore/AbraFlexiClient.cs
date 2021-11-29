@@ -45,6 +45,12 @@ namespace AbraFlexiAspNetCore
         /// </summary>
         /// <returns>List of <see cref="BankAccount"/></returns>
         public Task<AbraResponse<IList<BankAccount>>> GetBankAccounts();
+        /// <summary>
+        /// Gets the invoice pdf
+        /// </summary>
+        /// <param name="invoiceId">Id of the invoice</param>
+        /// <returns></returns>
+        public Task<byte[]?> GetInvoicePdf(int invoiceId);
 
         /// <summary>
         /// Creates an invoice
@@ -214,6 +220,15 @@ namespace AbraFlexiAspNetCore
         public async Task<AbraResponse<IList<BankAccount>>> GetBankAccounts()
         {
             return await GetList<BankAccount>("bankovni-ucet.json");
+        }
+        
+        /// <inheritdoc />
+        public async Task<byte[]?> GetInvoicePdf(int invoiceId)
+        {
+            var request = CreateRequest(HttpMethod.Get, $"faktura-vydana/{invoiceId}.pdf?report-name=fakturaKB$$SUM");
+            var response = await _httpClient.SendAsync(request);
+            if (!response.IsSuccessStatusCode) return null;
+            return await response.Content.ReadAsByteArrayAsync();
         }
 
         #endregion

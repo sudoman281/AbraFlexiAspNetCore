@@ -23,7 +23,7 @@ namespace AbraFlexiAspNetCoreTests
         }
         
         [Fact]
-        public async Task GetCurrencies()
+        public async Task TestGetCurrencies()
         {
             var response = await Client.GetCurrencies();
             Assert.NotNull(response.Data);
@@ -31,7 +31,7 @@ namespace AbraFlexiAspNetCoreTests
         }
         
         [Fact]
-        public async Task GetPaymentTypes()
+        public async Task TestGetPaymentTypes()
         {
             var response = await Client.GetPaymentTypes();
             Assert.NotNull(response.Data);
@@ -39,11 +39,18 @@ namespace AbraFlexiAspNetCoreTests
         }
         
         [Fact]
-        public async Task GetBankAccounts()
+        public async Task TestGetBankAccounts()
         {
             var response = await Client.GetBankAccounts();
             Assert.NotNull(response.Data);
             Assert.NotNull(response.Data.FirstOrDefault(d => d.Code == "FIO"));
+        }
+        
+        [Fact]
+        public async Task TestGetInvoicePdf()
+        {
+            var response = await Client.GetInvoicePdf(1);
+            Assert.NotNull(response);
         }
     }
 }
