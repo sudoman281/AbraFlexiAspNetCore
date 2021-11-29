@@ -11,6 +11,9 @@ using Newtonsoft.Json;
 
 namespace AbraFlexiAspNetCore
 {
+    /// <summary>
+    /// Abra request client
+    /// </summary>
     public interface IAbraFlexiClient
     {
         /// <summary>
@@ -101,9 +104,8 @@ namespace AbraFlexiAspNetCore
             string? country = null);
     }
 
-    /// <summary>
-    /// Abra request client
-    /// </summary>
+
+    /// <inheritdoc />
     public class AbraFlexiClient : IAbraFlexiClient
     {
         private readonly AuthenticationHeaderValue _auth;
