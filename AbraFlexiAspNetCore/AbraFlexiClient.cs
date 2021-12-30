@@ -57,6 +57,7 @@ namespace AbraFlexiAspNetCore
         /// Creates an invoice
         /// </summary>
         /// <param name="due">Due date</param>
+        /// <param name="dateIssued">Date issued</param>
         /// <param name="currencyCode">Abra currency code <seealso cref="GetCurrencies"/></param>
         /// <param name="companyName">Company name</param>
         /// <param name="paymentTypeCode">Abra payment type code <seealso cref="GetPaymentTypes"/></param>
@@ -68,7 +69,7 @@ namespace AbraFlexiAspNetCore
         /// <param name="zipCode">Company ZIP code</param>
         /// <param name="country">Company country</param>
         /// <returns></returns>
-        public Task<AbraPostResponse> CreateInvoice(DateTime due, string currencyCode, string companyName,
+        public Task<AbraPostResponse> CreateInvoice(DateTime due, DateTime dateIssued, string currencyCode, string companyName,
             string paymentTypeCode, List<CreateInvoiceInvoiceItem> invoiceItems, string? @in = null, string? tin = null,
             string? city = null, string? street = null, string? zipCode = null, string? country = null);
 
@@ -76,10 +77,11 @@ namespace AbraFlexiAspNetCore
         /// Creates a bank income
         /// </summary>
         /// <param name="price">Amount of money received</param>
+        /// <param name="dateReceived">Date the payment was received</param>
         /// <param name="bankCode">Abra bank account code <seealso cref="GetBankAccounts"/></param>
         /// <param name="currencyCode">Abra currency code <seealso cref="GetCurrencies"/></param>
         /// <returns></returns>
-        public Task<AbraPostResponse> CreateBankReceivedPayment(float price, string bankCode, string currencyCode);
+        public Task<AbraPostResponse> CreateBankReceivedPayment(float price, string bankCode, string currencyCode, DateTime dateReceived);
 
         /// <summary>
         /// Pairs an income with an invoice 
@@ -93,6 +95,8 @@ namespace AbraFlexiAspNetCore
         /// Creates an invoice, payment and pairs them
         /// </summary>
         /// <param name="due">Due date</param>
+        /// <param name="dateIssued">Date issued</param>
+        /// <param name="datePaid">Date paid</param>
         /// <param name="currencyCode">Abra currency code <seealso cref="GetCurrencies"/></param>
         /// <param name="companyName">Company name</param>
         /// <param name="paymentTypeCode">Abra payment type code <seealso cref="GetPaymentTypes"/></param>
@@ -105,7 +109,7 @@ namespace AbraFlexiAspNetCore
         /// <param name="zipCode">Company ZIP code</param>
         /// <param name="country">Company country</param>
         /// <returns></returns>
-        public Task<Dictionary<string, AbraPostResponse>> CreateAndPayInvoice(DateTime due, string currencyCode,
+        public Task<Dictionary<string, AbraPostResponse>> CreateAndPayInvoice(DateTime due, DateTime dateIssued, DateTime datePaid, string currencyCode,
             string companyName, string paymentTypeCode, List<CreateInvoiceInvoiceItem> invoiceItems, string bankCode,
             string? @in = null, string? tin = null, string? city = null, string? street = null, string? zipCode = null,
             string? country = null);
@@ -237,7 +241,7 @@ namespace AbraFlexiAspNetCore
         #region Post
 
         /// <inheritdoc />
-        public async Task<AbraPostResponse> CreateInvoice(DateTime due, string currencyCode, string companyName,
+        public async Task<AbraPostResponse> CreateInvoice(DateTime due, DateTime dateIssued, string currencyCode, string companyName,
             string paymentTypeCode, List<CreateInvoiceInvoiceItem> invoiceItems, string? @in = null, string? tin = null,
             string? city = null, string? street = null, string? zipCode = null, string? country = null)
         {
@@ -288,7 +292,7 @@ namespace AbraFlexiAspNetCore
 
             var invoices = new List<CreateInvoiceInvoice>
             {
-                new(due, invoiceTypeId.Value, currencyId.Value, DateTime.Now,
+                new(due, invoiceTypeId.Value, currencyId.Value, dateIssued,
                     companyName, @in, tin, city, street, zipCode, country, invoiceItems, false,
                     paymentTypeId.Value)
             };
@@ -297,7 +301,7 @@ namespace AbraFlexiAspNetCore
         }
 
         /// <inheritdoc />
-        public async Task<AbraPostResponse> CreateBankReceivedPayment(float price, string bankCode, string currencyCode)
+        public async Task<AbraPostResponse> CreateBankReceivedPayment(float price, string bankCode, string currencyCode, DateTime dateReceived)
         {
             var banks = await GetBankAccounts();
             var currencies = await GetCurrencies();
@@ -333,7 +337,7 @@ namespace AbraFlexiAspNetCore
             var payments = new List<CreateBankReceivedPaymentPayment>
             {
                 new(price, bankId.Value, invoiceTypeId.Value, currencyId.Value,
-                    "typPohybu.prijem", DateTime.Now, true)
+                    "typPohybu.prijem", dateReceived, true)
             };
             return await PostRequest("faktura-vydana.json",
                 new AbraRequest<CreateBankReceivedPayment>(new CreateBankReceivedPayment(payments)));
@@ -348,7 +352,7 @@ namespace AbraFlexiAspNetCore
         }
 
         /// <inheritdoc />
-        public async Task<Dictionary<string, AbraPostResponse>> CreateAndPayInvoice(DateTime due, string currencyCode,
+        public async Task<Dictionary<string, AbraPostResponse>> CreateAndPayInvoice(DateTime due, DateTime dateIssued, DateTime datePaid, string currencyCode,
             string companyName, string paymentTypeCode, List<CreateInvoiceInvoiceItem> invoiceItems, string bankCode,
             string? @in = null, string? tin = null, string? city = null, string? street = null, string? zipCode = null,
             string? country = null)
@@ -376,10 +380,10 @@ namespace AbraFlexiAspNetCore
 
             var responses = new Dictionary<string, AbraPostResponse>();
 
-            var invoiceResponse = await CreateInvoice(due, currencyCode, companyName, paymentTypeCode,
+            var invoiceResponse = await CreateInvoice(due, dateIssued, currencyCode, companyName, paymentTypeCode,
                 invoiceItems, @in, tin, city, street, zipCode, country);
             responses.Add("Invoice", invoiceResponse);
-            var paymentResponse = await CreateBankReceivedPayment(price, bankCode, currencyCode);
+            var paymentResponse = await CreateBankReceivedPayment(price, bankCode, currencyCode, datePaid);
             responses.Add("Payment", paymentResponse);
             if (!(invoiceResponse.Body?.Success ?? false) || !(paymentResponse.Body?.Success ?? false))
                 return responses;
