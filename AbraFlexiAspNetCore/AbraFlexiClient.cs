@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -370,7 +371,7 @@ namespace AbraFlexiAspNetCore
                     };
                 }
 
-                price += invoiceItem.Quantity * float.Parse(priceListItem.PriceBaseWithVat);
+                price += invoiceItem.Quantity * float.Parse(priceListItem.PriceBaseWithVat, CultureInfo.InvariantCulture);
             }
 
             var responses = new Dictionary<string, AbraPostResponse>();
