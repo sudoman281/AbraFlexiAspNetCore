@@ -1,14 +1,10 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=81d5d787_002Da3d0_002D4fa0_002Dbd76_002Da81d4746d760/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestCreateAndPayInvoice1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.WriteTests.TestCreateAndPayInvoice1&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.ReadTests.TestGetCountries&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=baa16f88_002D06b4_002D43ad_002Db9e9_002D7b4f22da04bd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestGetCurrencies" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.ReadTests.TestGetCurrencies&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.ReadTests.TestGetCountries&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.WriteTests.TestCreateAndPayInvoice1&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::46E217D6-C494-468D-A513-1CAB9DB53BF9::net5.0::AbraFlexiAspNetCoreTests.WriteTests.TestCreateAndPayInvoice&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

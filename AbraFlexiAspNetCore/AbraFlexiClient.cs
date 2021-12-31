@@ -289,14 +289,18 @@ namespace AbraFlexiAspNetCore
                     Error = $"Payment type {paymentTypeCode} not found."
                 };
             }
-            
-            var countryTypeId = countryList.Data!.SingleOrDefault(c => c.Code == countryCode)?.Id;
-            if (countryTypeId == null)
+
+            int? countryId = null;
+            if (countryCode != null)
             {
-                return new AbraPostResponse
+                countryId = countryList.Data!.SingleOrDefault(c => c.Code == countryCode)?.Id;
+                if (countryId == null)
                 {
-                    Error = $"Country code {countryCode} not found."
-                };
+                    return new AbraPostResponse
+                    {
+                        Error = $"Country code {countryCode} not found."
+                    };
+                }
             }
 
             foreach (var invoiceItem in invoiceItems)
@@ -315,7 +319,7 @@ namespace AbraFlexiAspNetCore
             var invoices = new List<CreateInvoiceInvoice>
             {
                 new(due, invoiceTypeId.Value, currencyId.Value, dateIssued,
-                    companyName, @in, tin, city, street, zipCode, countryTypeId, invoiceItems, false,
+                    companyName, @in, tin, city, street, zipCode, countryId, invoiceItems, false,
                     paymentTypeId.Value)
             };
             return await PostRequest("faktura-vydana.json",

@@ -16,7 +16,7 @@
         <PackageTags>abra flexi flexibee accounting czech asp net core</PackageTags>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Nullable>enable</Nullable>
-        <PackageVersion>2.0.3</PackageVersion>
+        <PackageVersion>2.0.4</PackageVersion>
     </PropertyGroup>
     
     <ItemGroup>
