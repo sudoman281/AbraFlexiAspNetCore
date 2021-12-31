@@ -46,5 +46,21 @@ namespace AbraFlexiAspNetCoreTests
             Assert.NotNull(responses["Pair"].Body);
             Assert.True(responses["Pair"].Body.Success);
         }
+
+        [Fact]
+        public async Task TestCreateAndPayInvoice1()
+        {
+            var invoiceItems = new List<CreateInvoiceInvoiceItem>
+            {
+                new(2, "KP1R"),
+                new(1, "KP1M"),
+            };
+            var responses = await Client.CreateAndPayInvoice(new DateTime(2021, 6, 12).AddDays(14),
+                new DateTime(2021, 6, 12), new DateTime(2021, 6, 12).AddDays(1),
+                "CZK", "Kobrasoft s.r.o.", "KARTA", invoiceItems, "FIO", "09840451", null, "Bratrušov",
+                "Bratrušov 95", "787 01", "CZ");
+            Assert.NotNull(responses["Pair"].Body);
+            Assert.True(responses["Pair"].Body.Success);
+        }
     }
 }

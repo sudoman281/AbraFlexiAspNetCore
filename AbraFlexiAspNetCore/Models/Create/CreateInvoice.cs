@@ -46,13 +46,13 @@ namespace AbraFlexiAspNetCore.Models.Create
         /// <param name="city">City of the company</param>
         /// <param name="street">Street of the company</param>
         /// <param name="zipCode">ZIP code of the company</param>
-        /// <param name="country">Country of the company</param>
+        /// <param name="countryId">Country of the company</param>
         /// <param name="invoiceItems">List of the price list items</param>
         /// <param name="withoutItems">Whether the invoice should be without any price list items or not</param>
         /// <param name="paymentTypeId">Payment type id</param>
         public CreateInvoiceInvoice(DateTime due, int invoiceType, int currency, DateTime dateIssued,
             string companyName, string? @in, string? tin, string? city, string? street, string? zipCode,
-            string? country, List<CreateInvoiceInvoiceItem> invoiceItems, bool withoutItems, int paymentTypeId)
+            int? countryId, List<CreateInvoiceInvoiceItem> invoiceItems, bool withoutItems, int paymentTypeId)
         {
             Due = due;
             InvoiceType = invoiceType;
@@ -64,7 +64,7 @@ namespace AbraFlexiAspNetCore.Models.Create
             City = city;
             Street = street;
             ZipCode = zipCode;
-            Country = country;
+            CountryId = countryId;
             InvoiceItems = invoiceItems;
             WithoutItems = withoutItems;
             PaymentTypeId = paymentTypeId;
@@ -118,7 +118,7 @@ namespace AbraFlexiAspNetCore.Models.Create
         /// <summary>
         /// Country of the company
         /// </summary>
-        [JsonProperty("stat")] public string? Country { get; }
+        [JsonProperty("stat")] public int? CountryId { get; }
         /// <summary>
         /// List of the price list items
         /// </summary>

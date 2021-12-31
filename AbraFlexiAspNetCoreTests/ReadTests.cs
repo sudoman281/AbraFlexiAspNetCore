@@ -31,6 +31,14 @@ namespace AbraFlexiAspNetCoreTests
         }
         
         [Fact]
+        public async Task TestGetCountries()
+        {
+            var response = await Client.GetCountries();
+            Assert.NotNull(response.Data);
+            Assert.NotNull(response.Data.FirstOrDefault(d => d.Code == "CZ"));
+        }
+        
+        [Fact]
         public async Task TestGetPaymentTypes()
         {
             var response = await Client.GetPaymentTypes();

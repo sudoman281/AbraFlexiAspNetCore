@@ -36,6 +36,12 @@ namespace AbraFlexiAspNetCore
         public Task<AbraResponse<IList<Currency>>> GetCurrencies();
 
         /// <summary>
+        /// Gets the countries
+        /// </summary>
+        /// <returns>List of <see cref="Country"/></returns>
+        public Task<AbraResponse<IList<Country>>> GetCountries();
+
+        /// <summary>
         /// Gets the payment types
         /// </summary>
         /// <returns>List of <see cref="PaymentType"/></returns>
@@ -67,11 +73,11 @@ namespace AbraFlexiAspNetCore
         /// <param name="city">Company city</param>
         /// <param name="street">Company street</param>
         /// <param name="zipCode">Company ZIP code</param>
-        /// <param name="country">Company country</param>
+        /// <param name="countryCode">Company country code</param>
         /// <returns></returns>
         public Task<AbraPostResponse> CreateInvoice(DateTime due, DateTime dateIssued, string currencyCode, string companyName,
             string paymentTypeCode, List<CreateInvoiceInvoiceItem> invoiceItems, string? @in = null, string? tin = null,
-            string? city = null, string? street = null, string? zipCode = null, string? country = null);
+            string? city = null, string? street = null, string? zipCode = null, string? countryCode = null);
 
         /// <summary>
         /// Creates a bank income
@@ -212,7 +218,13 @@ namespace AbraFlexiAspNetCore
         /// <inheritdoc />
         public async Task<AbraResponse<IList<Currency>>> GetCurrencies()
         {
-            return await GetList<Currency>("mena.json");
+            return await GetList<Currency>("mena.json?limit=100");
+        }
+        
+        /// <inheritdoc />
+        public async Task<AbraResponse<IList<Country>>> GetCountries()
+        {
+            return await GetList<Country>("stat.json?limit=100");
         }
 
         /// <inheritdoc />
@@ -243,12 +255,13 @@ namespace AbraFlexiAspNetCore
         /// <inheritdoc />
         public async Task<AbraPostResponse> CreateInvoice(DateTime due, DateTime dateIssued, string currencyCode, string companyName,
             string paymentTypeCode, List<CreateInvoiceInvoiceItem> invoiceItems, string? @in = null, string? tin = null,
-            string? city = null, string? street = null, string? zipCode = null, string? country = null)
+            string? city = null, string? street = null, string? zipCode = null, string? countryCode = null)
         {
             var invoiceTypes = await GetInvoiceTypes();
             var currencies = await GetCurrencies();
             var paymentTypes = await GetPaymentTypes();
             var priceList = await GetPriceList();
+            var countryList = await GetCountries();
 
             var invoiceTypeId = invoiceTypes.Data!.SingleOrDefault(t => t.Code == "FAKTURA")?.Id;
             if (invoiceTypeId == null)
@@ -276,6 +289,15 @@ namespace AbraFlexiAspNetCore
                     Error = $"Payment type {paymentTypeCode} not found."
                 };
             }
+            
+            var countryTypeId = countryList.Data!.SingleOrDefault(c => c.Code == countryCode)?.Id;
+            if (countryTypeId == null)
+            {
+                return new AbraPostResponse
+                {
+                    Error = $"Country code {countryCode} not found."
+                };
+            }
 
             foreach (var invoiceItem in invoiceItems)
             {
@@ -293,7 +315,7 @@ namespace AbraFlexiAspNetCore
             var invoices = new List<CreateInvoiceInvoice>
             {
                 new(due, invoiceTypeId.Value, currencyId.Value, dateIssued,
-                    companyName, @in, tin, city, street, zipCode, country, invoiceItems, false,
+                    companyName, @in, tin, city, street, zipCode, countryTypeId, invoiceItems, false,
                     paymentTypeId.Value)
             };
             return await PostRequest("faktura-vydana.json",
