@@ -43,10 +43,19 @@ namespace AbraFlexiAspNetCore.Models.Create
         /// <param name="movementType">Movement type e.g. "typPohybu.prijem"</param>
         /// <param name="dateIssued">Date issued</param>
         /// <param name="withoutItems">Whether the movement is without items or not</param>
+        /// <param name="currencyCode">Currency code</param>
         public CreateBankReceivedPaymentPayment(float price, int bank, int invoiceType, int currency, string movementType,
-            DateTime dateIssued, bool withoutItems)
+            DateTime dateIssued, bool withoutItems, string currencyCode)
         {
-            Price = price;
+            if (currencyCode == "CZK")
+            {
+                Price = price;
+            }
+            else
+            {
+                PriceOtherCurrency = price;
+            }
+
             Bank = bank;
             InvoiceType = invoiceType;
             Currency = currency;
@@ -58,7 +67,11 @@ namespace AbraFlexiAspNetCore.Models.Create
         /// <summary>
         /// Amount of money received
         /// </summary>
-        [JsonProperty("sumOsv")] public float Price { get; }
+        [JsonProperty("sumOsv")] public float? Price { get; }
+        /// <summary>
+        /// Amount of money received (if the currency was foreign)
+        /// </summary>
+        [JsonProperty("sumOsvMen")] public float? PriceOtherCurrency { get; }
         /// <summary>
         /// Id of the bank
         /// </summary>

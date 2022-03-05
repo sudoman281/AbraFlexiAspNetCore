@@ -363,7 +363,7 @@ namespace AbraFlexiAspNetCore
             var payments = new List<CreateBankReceivedPaymentPayment>
             {
                 new(price, bankId.Value, invoiceTypeId.Value, currencyId.Value,
-                    "typPohybu.prijem", dateReceived, true)
+                    "typPohybu.prijem", dateReceived, true, currencyCode)
             };
             return await PostRequest("faktura-vydana.json",
                 new AbraRequest<CreateBankReceivedPayment>(new CreateBankReceivedPayment(payments)));

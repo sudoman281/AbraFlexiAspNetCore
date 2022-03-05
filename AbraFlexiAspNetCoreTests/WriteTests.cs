@@ -32,6 +32,16 @@ namespace AbraFlexiAspNetCoreTests
             Assert.NotNull(response.Body.Stats);
             Assert.Equal(1, response.Body.Stats.Created);
         }
+        
+        [Fact]
+        public async Task TestCreateBankReceivedPaymentForeignCurrency()
+        {
+            var response = await Client.CreateBankReceivedPayment(28, "FIO", "EUR", DateTime.Now);
+            Assert.NotNull(response.Body);
+            Assert.True(response.Body.Success);
+            Assert.NotNull(response.Body.Stats);
+            Assert.Equal(1, response.Body.Stats.Created);
+        }
 
         [Fact]
         public async Task TestCreateAndPayInvoice()
